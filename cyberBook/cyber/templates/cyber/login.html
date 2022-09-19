@@ -1,0 +1,134 @@
+{% load static%}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap/dist/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+    <link rel="stylesheet" href="{% static 'css/open-iconic/font/css/open-iconic-bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-icons/font/bootstrap-icons.css'%}"> 
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static '/apple-touch-icon.png'%}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png'%}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png'%}">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest'%}">
+    <!-- or link to the CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.17/dist/css/splide.min.css">
+    
+    <title>Login</title>
+  </head>
+  <body>
+
+
+
+
+    <div class"back container">
+        <img src="{% static 'svg/Fondo.svg'%}" class="fondo" >
+      </div>
+
+    <div class="barraNav container">
+        <div id="menu">
+            <div id="menu-bar" onclick="menuOnClick()">
+                <div id="bar1" class="bar"></div>
+                <div id="bar2" class="bar"></div>
+                <div id="bar3" class="bar"></div>
+            </div>
+            <nav class="nav" id="nav">
+                <ul>
+                    <li><a href="{% url 'index' %}">Inicio</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                    <li><a href="{% url 'contacto' %}">Contacto</a></li>
+                </ul>
+            </nav> 
+        </div>
+        <a class="brand" href="{% url 'index' %}">
+          <img src="{% static 'svg/Logo Principal.svg'%}" class="logo img-fluid" alt="" width="90" height="84">
+        </a>
+    </div>
+    <div class="menu-bg" id="menu-bg"></div>
+
+
+    <section class="vh-100">
+        <div class="container-fluid h-custom">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img src="{% static 'svg/Logo Principal.svg'%}" class="logo img-fluid" alt="">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                <form class="row g-3 needs-validation mt-4" novalidate>
+                    <div class="mb-4">
+                      <label for="validationCustom01" class="form-label" style="color: white; font-size: 30px; font-weight: 700;">Correo Electrónico</label>
+                      <input type="email" class="form-control" id="validationCustom01" placeholder="Ingresa tu Correo Electrónico" required>
+                      <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                    </div>
+                    <div class="mb-4">
+                      <label for="validationCustom02" class="form-label" style="color: #021C51; font-size: 30px; font-weight: 700;">Contraseña</label>
+                      <input type="password" class="form-control" id="validationCustom02" placeholder="Ingresa tu Contraseña" required>
+                      <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                    </div>
+                    <div class="col-12 text-end">
+                      <button class="btn btn-primary" type="submit">Iniciar Sesión</button>
+                    </div>
+                    <div class="text-center mt-4 pt-2">
+                        <p class="small ">¿No tienes cuenta? <a href="{% url 'signup' %}">
+                            Regístrate</a>
+                        </p>
+                    </div>
+                  </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    <script src="{% static 'css/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'css/bootstrap/dist/js/bootstrap.min.js'%}"></script>
+
+    <script>
+      function menuOnClick() {
+        document.getElementById("menu-bar").classList.toggle("change");
+        document.getElementById("nav").classList.toggle("change");
+        document.getElementById("menu-bg").classList.toggle("change-bg");
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.17/dist/js/splide.min.js"></script>
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+            })
+        })()
+    </script>
+      
+  </body>
+</html>

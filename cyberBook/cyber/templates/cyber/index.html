@@ -1,0 +1,245 @@
+{% load static%}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap/dist/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+    <link rel="stylesheet" href="{% static 'css/open-iconic/font/css/open-iconic-bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-icons/font/bootstrap-icons.css'%}"> 
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static '/apple-touch-icon.png'%}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png'%}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png'%}">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest'%}">
+    <!-- or link to the CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.17/dist/css/splide.min.css">
+    
+    <title>CyberBook</title>
+  </head>
+  <body>
+
+
+    <div class"back container">
+      <img src="{% static 'svg/Fondo.svg'%}" class="fondo" >
+    </div>
+
+    <div class="barraNav container">
+      <div id="menu">
+        <div id="menu-bar" onclick="menuOnClick()">
+          <div id="bar1" class="bar"></div>
+          <div id="bar2" class="bar"></div>
+          <div id="bar3" class="bar"></div>
+        </div>
+        <nav class="nav" id="nav">
+          <ul>
+            <li><a href="{% url 'index' %}">Inicio</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'contacto' %}">Contacto</a></li>
+          </ul>
+        </nav> 
+      </div>
+      <a class="brand" href="{% url 'index' %}">
+        <img src="{% static 'svg/Logo Principal.svg'%}" class="logo img-fluid" alt="" width="90" height="84">
+      </a>
+    </div>
+    <div class="menu-bg" id="menu-bg"></div>
+
+
+    <section class="main container">
+      <article class="description">
+        <div class="main-title">
+          <h1 class="cyber">CyberBook</h1>
+          <h3 class="subtitle">
+            La app del futuro para reservación de salones, 
+            laboratorios, equipo, licencias, etc. Dentro del 
+            Hub de Ciberseguiridad del TEC de Monterrey.
+          </h3>
+          <div class="downloadBtn text-end">
+            <button type="button" class="btn download"><i class="bi bi-apple"></i><span class="downloadTxt">Disponible en Apple Store</span></button>
+          </div>
+        </div>
+        <div class="main-image">
+          <img src="{% static 'png/screen1.png'%}" class="screen1 img-fluid" >
+        </div>
+      </article>
+    </section>
+
+    <section class="hub container">
+      <article class="cyberHub">
+        <div>
+          <h1 class="title">¿Qué es el Hub de Ciberseguiridad?</h1>
+          <h3 class="explanation">
+            Lorem Ipsum is simply dummy text of the printing and typesetting 
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of 
+            type and scrambled it to make a type specimen book. It has 
+            survived not only five centuries, but also the leap into e
+            lectronic typesetting, remaining essentially unchanged. It 
+            was popularised in the 1960s with the release of Letraset 
+            sheets containing Lorem Ipsum passages, and more recently 
+            with desktop publishing software like Aldus PageMaker including 
+            versions of Lorem Ipsum.
+          </h3>
+        </div>
+      </article>
+    </section>
+
+    <section class ="services container mt-5">
+      <h1 class = "title"> Servicios </h1>
+      <article class="items">
+        <div class = "row text-center">
+          <div class = "col">
+            <img src="{% static 'png/lab.png'%}" class="service-item img-fluid">
+            <h1>Laboratorio</h1>
+            <p>explanation</p>
+          </div><div class = "col">
+            <img src="{% static 'png/salón.png'%}" class="service-item img-fluid">
+            <h1>Salón</h1>
+            <p>explanation</p>
+          </div>
+          <div class = "col">
+            <img src="{% static 'png/junta.png'%}" class="service-item img-fluid">
+            <h1>Sala de Juntas</h1>
+            <p>explanation</p>
+          </div>
+        </div>
+
+        <div class = "row text-center mt-5">
+          <div class = "col">
+            <img src="{% static 'png/equipo.png'%}" class="service-item img-fluid">
+            <h1>Equipo</h1>
+            <p>explanation</p>
+          </div>
+          <div class = "col">
+            <img src="{% static 'png/licencia.png'%}" class="service-item img-fluid">
+            <h1>Licencias</h1>
+            <p>explanation</p>
+          </div>
+          <div class = "col">
+            <img src="{% static 'png/software.png'%}" class="service-item img-fluid">
+            <h1>Software</h1>
+            <p>explanation</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="about container mt-5">
+      <h1 class = "title text-end"> Conoce CyberBook</h1>
+      <article class="row d-flex text-center">
+        <div class = "col attributes">
+          <div>
+            <img src="{% static 'png/register.png'%}" class="about-item img-fluid"><p>Lorem Ipsum is simply dummy text of the printing and typesetting 
+                                                                                      industry. Lorem Ipsum has been the industry's standard dummy text
+                                                                                      ever since the 1500s, when an unknown printer took a galley of 
+                                                                                      type and scrambled it to make a type specimen book.</p>
+          </div>
+          <div>
+            <img src="{% static 'png/book.png'%}" class="about-item img-fluid"><p>Lorem Ipsum is simply dummy text of the printing and typesetting 
+                                                                                      industry. Lorem Ipsum has been the industry's standard dummy text
+                                                                                      ever since the 1500s, when an unknown printer took a galley of 
+                                                                                      type and scrambled it to make a type specimen book.</p>
+          </div>
+          <div>
+            <img src="{% static 'png/historial.png'%}" class="about-item img-fluid"><p>Lorem Ipsum is simply dummy text of the printing and typesetting 
+                                                                                      industry. Lorem Ipsum has been the industry's standard dummy text
+                                                                                      ever since the 1500s, when an unknown printer took a galley of 
+                                                                                      type and scrambled it to make a type specimen book.</p>
+          </div>
+          <div>
+            <img src="{% static 'png/bulb.png'%}" class="about-item img-fluid"><p>Lorem Ipsum is simply dummy text of the printing and typesetting 
+                                                                                      industry. Lorem Ipsum has been the industry's standard dummy text
+                                                                                      ever since the 1500s, when an unknown printer took a galley of 
+                                                                                      type and scrambled it to make a type specimen book.</p>
+          </div>
+        </div>
+        <div class = "col ms-5">
+          <img src="{% static 'png/screen2.png'%}" class="screen2 img-fluid">
+        </div>
+      </article>
+    </section>
+
+    <section class="org mt-5 splide" aria-label="Splide Basic HTML Example">
+      <h1 class = "title text-center"> Organizaciones Participantes</h1>
+      <div class = "row text-center ">
+        <div class = "col">
+          <img src="{% static 'png/tec.png'%}" class="organizations-main img-fluid">
+        </div>
+        <div class = "col">
+          <img src="{% static 'png/hub.png'%}" class="organizations-main img-fluid" style="margin-top: 35px;">
+        </div>
+      </div>
+      <div class="splide__track">
+        <ul class="splide__list">
+          <li class="splide__slide text-center"><img src="{% static 'png/banamex.png'%}" class="organizations img-fluid" style="margin-top: 110px;"></li>
+          <li class="splide__slide text-center"><img src="{% static 'png/nic.png'%}" class="organizations img-fluid"></li>
+          <li class="splide__slide text-center"><img src="{% static 'png/ibm.png'%}" class="organizations img-fluid"></li>
+          <li class="splide__slide text-center"><img src="{% static 'png/microsoft.png'%}" class="organizations img-fluid" style="margin-top: 110px;"></li>
+          <li class="splide__slide text-center"><img src="{% static 'png/deloitte.png'%}" class="organizations img-fluid" style="margin-top: 110px;"></li>
+          <li class="splide__slide text-center"><img src="{% static 'png/cisco.png'%}" class="organizations img-fluid"></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class ="team container mt-5">
+      <h1 class = "title"> Equipo de Desarrollo</h1>
+      <article>
+        <div class = "row text-center">
+          <div class = "col">
+            <img src="{% static 'jpg/eli.jpeg'%}" class="img-fluid rounded-circle" style="max-width: 70%">
+            <h1 style="font-size: 30px">Elí Salomón Martínez Hernández</h1>
+            <p>Desarrollo Móvil y Front-end en Página Web</p>
+          </div><div class = "col">
+            <img src="{% static 'jpg/artur.jpeg'%}" class="img-fluid rounded-circle" style="max-width: 70%">
+            <h1 style="font-size: 30px">Arturo Alfaro González</h1>
+            <p>PMO y Back-end en Página Web</p>
+          </div>
+          <div class = "col">
+            <img src="{% static 'jpg/ro.jpeg'%}" class="img-fluid rounded-circle" style="max-width: 70%">
+            <h1 style="font-size: 30px">Rodrigo Aldahir Rosete Flores</h1>
+            <p>Documentación IEEE y Diseño de Base de Datos</p>
+          </div>
+        </div>
+
+      </article>
+    </section>
+
+
+    <script src="{% static 'css/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'css/bootstrap/dist/js/bootstrap.min.js'%}"></script>
+
+    <script>
+      function menuOnClick() {
+        document.getElementById("menu-bar").classList.toggle("change");
+        document.getElementById("nav").classList.toggle("change");
+        document.getElementById("menu-bg").classList.toggle("change-bg");
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.17/dist/js/splide.min.js"></script>
+
+
+    <script>
+      var splide = new Splide( '.splide', {
+        type   : 'loop',
+        drag   : 'free',
+        perPage: 3,
+      } );
+      
+      splide.mount();
+    </script>
+      
+  </body>
+</html>
