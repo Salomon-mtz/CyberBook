@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from django.template import loader
 from pyrebase import pyrebase
 
+from .forms import NewUserForm
+from django.contrib.auth import login
+from django.contrib import messages
 
 config = {
   "apiKey": "AIzaSyCDvxtOqMSsiQ38fgNZ8uaDIvsc2EqUr00",
@@ -18,26 +21,21 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 def login(request):
-    # Get a reference to the auth service
-    auth = firebase.auth()
-    # Log the user in
-    user = auth.sign_in_with_email_and_password(email, password)
-    # Get a reference to the database service
-    db = firebase.database()
-    # data to save
-    data = {
-        "name": "Mortimer 'Morty' Smith"
-    }
-    # Pass the user's idToken to the push method
-    results = db.child("users").push(data, user['idToken'])
     template = loader.get_template('cyber/login.html')
     context = {}
     return HttpResponse(template.render(context, request))
 
 def signup(request):
-    template = loader.get_template('cyber/signup.html')
-    context = {}
-    return HttpResponse(template.render(context, request))
+    if request.method == "POST":
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, "Registration successful." )
+            return redirect("cyber/index.html")
+        messages.error(request, "Unsuccessful registration. Invalid information.")
+    form = NewUserForm()
+    return render (request=request, template_name="cyber/signup.html", context={"register_form":form})
 
 def contacto(request):
     template = loader.get_template('cyber/contacto.html')

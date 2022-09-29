@@ -67,24 +67,26 @@
                 <img src="{% static 'svg/Logo Principal.svg'%}" class="logo img-fluid" alt="">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                <form class="row g-3 needs-validation mt-4" novalidate>
+                <form class="row g-3 needs-validation mt-4" novalidate method="POST">
+                  {% csrf_token %}
+		             
                     <div class="mb-4">
                         <label for="validationCustom01" class="form-label" style="color: white; font-size: 30px; font-weight: 700;">Nombre</label>
-                        <input type="name" class="form-control" id="validationCustom01" placeholder="Ingresa tu Nombre" required>
+                        <input type="name" class="form-control" id="validationCustom01" placeholder="Ingresa tu Nombre" name="first_name" required>
                         <div class="valid-feedback">
                           Se ve bien!
                         </div>
                       </div>
                     <div class="mb-4">
                       <label for="validationCustom01" class="form-label" style="color: white; font-size: 30px; font-weight: 700;">Correo Electrónico</label>
-                      <input type="email" class="form-control" id="validationCustom01" placeholder="Ingresa tu Correo Electrónico" required>
+                      <input type="email" class="form-control" id="validationCustom01" placeholder="Ingresa tu Correo Electrónico" name="email" required>
                       <div class="valid-feedback">
                         Se ve bien!
                       </div>
                     </div>
                     <div class="mb-4">
-                        <label for="validationPassword" style="color: #021C51; font-size: 30px; font-weight: 700;">Password</label>
-                        <input type="password" class="form-control" id="validationPassword" minlength="8" name="password" placeholder="Password" value="" required>
+                        <label for="validationPassword" style="color: white; font-size: 30px; font-weight: 700;">Password</label>
+                        <input type="password" class="form-control" id="validationPassword" minlength="8" name="password" placeholder="Password" value="" name="password1" required>
                         <div  class="progress mt-2" style="height: 5px;">
                             <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -102,9 +104,29 @@
                             Letra mayúscula y minúscula
                         </div>                    
                     </div>
+                    <div class="mb-4">
+                      <label for="confirmPassword" style="color: #021C51; font-size: 30px; font-weight: 700;">Confirm Password</label>
+                      <input type="password" class="form-control" id="confirmPassword" minlength="8" name="password" placeholder="Confirm Password" value="" name="password2" required>            
+                      <div  class="progress mt-2" style="height: 5px;">
+                        <div id="progressbar2" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    
+                      <small id="passwordHelpBlock2" class="form-text text-muted">
+                          Tu contraseña debe tener 8-20 caracteres, debe contener caracteres especiales "!@#$%&*_?", números, letras máyusculas y minúsculas
+                      </small>
+                
+                      <div id="feedbackin2" class="valid-feedback">
+                          Contraseña Fuerte
+                      </div>
+                      <div id="feedbackirn2" class="invalid-feedback">
+                          Mínimo 8 caracteres
+                          Número, caracter especial
+                          Letra mayúscula y minúscula
+                      </div>           
+                    </div>
                     <div class="col-12">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
                         <label class="form-check-label" for="invalidCheck">
                           Términos y Condiciones
                         </label>
@@ -122,7 +144,9 @@
                             Inicia Sesión</a>
                         </p>
                       </div>
+                      
                   </form>
+                  
             </div>
           </div>
         </div>
@@ -199,6 +223,10 @@
                           event.preventDefault();
                             event.stopPropagation();	  
                         }
+                
+                  
+
+                  
           
                   });
               
@@ -312,7 +340,9 @@
               });
             }, false);
           })();
-    </script>
+  </script>
+
+
       
   </body>
 </html>
