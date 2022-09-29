@@ -2,10 +2,14 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from pyrebase import pyrebase
-
 from .forms import NewUserForm
-from django.contrib.auth import login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
+import sqlite3
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required   
+import hashlib
 
 config = {
   "apiKey": "AIzaSyCDvxtOqMSsiQ38fgNZ8uaDIvsc2EqUr00",
@@ -21,21 +25,40 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 def login(request):
-    template = loader.get_template('cyber/login.html')
-    context = {}
-    return HttpResponse(template.render(context, request))
+    if request.method == 'POST':
+            username = request.POST['username']
+            pwd = request.POST['password1']
+            
+            user = authenticate(request, username=username, password=pwd)
+            
+            if user is not None:
+                login(request, user)    
+                return redirect('cyber/index.html')
+                messages.success(request, ('Good login'))
+            else:
+                messages.error(request, ('Bad login'))
+                return render(request, 'cyber/login.html', {})
+            
+    else:
+        return render(request, 'cyber/login.html', {})
 
 def signup(request):
     if request.method == "POST":
         form = NewUserForm(request.POST)
+        username = request.POST['username']
+        pwd = request.POST['password1']
         if form.is_valid():
             user = form.save()
+            user = authenticate(request, username=username, password=pwd)
             login(request, user)
-            messages.success(request, "Registration successful." )
+            messages.success(request, ('Registration seccessful'))
             return redirect("cyber/index.html")
-        messages.error(request, "Unsuccessful registration. Invalid information.")
-    form = NewUserForm()
-    return render (request=request, template_name="cyber/signup.html", context={"register_form":form})
+        else:
+            messages.error(request, "Unsuccessful registration. Invalid information.")
+            print(form.errors)
+            return render(request, 'cyber/signup.html', {'form': form})
+    else:
+        return render(request, 'cyber/signup.html', {})
 
 def contacto(request):
     template = loader.get_template('cyber/contacto.html')

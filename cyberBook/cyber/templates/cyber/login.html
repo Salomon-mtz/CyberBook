@@ -67,17 +67,32 @@
                 <img src="{% static 'svg/Logo Principal.svg'%}" class="logo img-fluid" alt="">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                <form class="row g-3 needs-validation mt-4" novalidate>
+                <form class="row g-3 needs-validation mt-4" method="POST" novalidate>
+                  {% csrf_token %}
+                  {% if messages %}
+                    {% for message in messages %}
+                      <div class="alert alert-danger text-center" role="alert">
+                        {{ message }}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    {% endfor %}
+                  {% endif %}
+      
+                  {% if form.errors %}
+                    <div>
+                      <h2 class = "errors" style="color: white; font-size: 20px; font-weight: 700;">{{ form.errors }}</h2>
+                    </div>
+                  {% endif %}
                     <div class="mb-4">
                       <label for="validationCustom01" class="form-label" style="color: white; font-size: 30px; font-weight: 700;">Correo Electrónico</label>
-                      <input type="email" class="form-control" id="validationCustom01" placeholder="Ingresa tu Correo Electrónico" required>
+                      <input type="email" class="form-control" id="validationCustom01" placeholder="Ingresa tu Correo Electrónico" name="username" required>
                       <div class="valid-feedback">
                         Looks good!
                       </div>
                     </div>
                     <div class="mb-4">
                       <label for="validationCustom02" class="form-label" style="color: #021C51; font-size: 30px; font-weight: 700;">Contraseña</label>
-                      <input type="password" class="form-control" id="validationCustom02" placeholder="Ingresa tu Contraseña" required>
+                      <input type="password" class="form-control" id="validationCustom02" placeholder="Ingresa tu Contraseña" name="password1" required>
                       <div class="valid-feedback">
                         Looks good!
                       </div>
