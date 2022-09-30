@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from pyrebase import pyrebase
 from .forms import NewUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -11,14 +10,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required   
 import hashlib
 
-config = {
-  "apiKey": "AIzaSyCDvxtOqMSsiQ38fgNZ8uaDIvsc2EqUr00",
-  "authDomain": "cyberbook-d8b6a.firebaseapp.com",
-  "databaseURL": "https://cyberbook-d8b6a-default-rtdb.firebaseio.com/",
-  "storageBucket": "cyberbook-d8b6a.appspot.com"
-}
-
-firebase = pyrebase.initialize_app(config)
 def index(request):
     template = loader.get_template('cyber/index.html')
     context = {}
