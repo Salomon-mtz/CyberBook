@@ -25,22 +25,21 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 def signin(request):
-    if request.method == "POST":
-        form = NewUserForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data.get('email')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(email=email, password=password)
-            if user is not None:
-                login(request, user)
-                messages.info(request, f"You are now logged in as {email}.")
-                return redirect("index")
-            else:
-                messages.error(request,"Email o contraseña incorrectos")
+    if request.method == 'POST':
+        email = request.POST['email']
+        pwd = request.POST['password']
+        username = User.objects.get(email=email.lower()).username
+        user = authenticate(request, username=username, password=pwd)
+        
+        if user is not None:
+            login(request, user)
+            return redirect('index')
         else:
-            messages.error(request,"Email o contraseña incorrectos")
-    form = NewUserForm()
-    return render(request=request, template_name="cyber/login.html", context={"login_form":form})
+            messages.success(request, ('Bad login'))
+            return render(request, 'cyber/login.html', {})
+            
+    else:
+        return render(request, 'cyber/login.html', {})
 
 def signup(request):
     if request.method == "POST":
