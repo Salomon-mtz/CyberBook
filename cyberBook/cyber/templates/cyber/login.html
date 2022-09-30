@@ -71,7 +71,7 @@
                   {% csrf_token %}
                   {% if messages %}
                     {% for message in messages %}
-                      <div class="alert alert-danger text-center" role="alert">
+                      <div class="alert alert-secondary text-center" role="alert">
                         {{ message }}
                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                       </div>
@@ -85,7 +85,7 @@
                   {% endif %}
                     <div class="mb-4">
                       <label for="validationCustom01" class="form-label" style="color: white; font-size: 30px; font-weight: 700;">Correo Electrónico</label>
-                      <input type="email" class="form-control" id="validationCustom01" placeholder="Ingresa tu Correo Electrónico" name="username" required>
+                      <input type="email" class="form-control" id="validationCustom01" placeholder="Ingresa tu Correo Electrónico" name="email" required>
                       <div class="valid-feedback">
                         Looks good!
                       </div>

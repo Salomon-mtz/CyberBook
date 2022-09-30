@@ -24,23 +24,23 @@ def index(request):
     context = {}
     return HttpResponse(template.render(context, request))
 
-def login(request):
-    if request.method == 'POST':
-            username = request.POST['username']
-            pwd = request.POST['password1']
-            
-            user = authenticate(request, username=username, password=pwd)
-            
+def signin(request):
+    if request.method == "POST":
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(email=email, password=password)
             if user is not None:
-                login(request, user)    
-                return redirect('cyber/index.html')
-                messages.success(request, ('Good login'))
+                login(request, user)
+                messages.info(request, f"You are now logged in as {email}.")
+                return redirect("index")
             else:
-                messages.error(request, ('Bad login'))
-                return render(request, 'cyber/login.html', {})
-            
-    else:
-        return render(request, 'cyber/login.html', {})
+                messages.error(request,"Email o contraseña incorrectos")
+        else:
+            messages.error(request,"Email o contraseña incorrectos")
+    form = NewUserForm()
+    return render(request=request, template_name="cyber/login.html", context={"login_form":form})
 
 def signup(request):
     if request.method == "POST":
@@ -51,10 +51,10 @@ def signup(request):
             user = form.save()
             user = authenticate(request, username=username, password=pwd)
             login(request, user)
-            messages.success(request, ('Registration seccessful'))
-            return redirect("cyber/index.html")
+            messages.success(request, ('Registro éxitoso'))
+            return redirect("index")
         else:
-            messages.error(request, "Unsuccessful registration. Invalid information.")
+            messages.error(request, "Registro fallido")
             print(form.errors)
             return render(request, 'cyber/signup.html', {'form': form})
     else:
