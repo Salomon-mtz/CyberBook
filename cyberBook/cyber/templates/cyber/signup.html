@@ -35,9 +35,9 @@
 
     <div class"back container">
         <img src="{% static 'svg/Fondo.svg'%}" class="fondo" >
-      </div>
-      
-    <div class="barraNav container">
+    </div>
+    {% if user.is_authenticated %}
+      <div class="barraNav container">
         <div id="menu">
             <div id="menu-bar" onclick="menuOnClick()">
                 <div id="bar1" class="bar"></div>
@@ -47,9 +47,8 @@
             <nav class="nav" id="nav">
                 <ul>
                     <li><a href="{% url 'index' %}">Inicio</a></li>
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                    <li><a href="{% url 'contacto' %}">Contacto</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href="{% url 'reservas' %}">Reserva</a></li>
                 </ul>
             </nav> 
         </div>
@@ -58,6 +57,28 @@
         </a>
     </div>
     <div class="menu-bg" id="menu-bg"></div>
+    {% else %}
+      <div class="barraNav container">
+          <div id="menu">
+              <div id="menu-bar" onclick="menuOnClick()">
+                  <div id="bar1" class="bar"></div>
+                  <div id="bar2" class="bar"></div>
+                  <div id="bar3" class="bar"></div>
+              </div>
+              <nav class="nav" id="nav">
+                  <ul>
+                      <li><a href="{% url 'index' %}">Inicio</a></li>
+                      <li><a href="{% url 'login' %}">Login</a></li>
+                      <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                  </ul>
+              </nav> 
+          </div>
+          <a class="brand" href="{% url 'index' %}">
+            <img src="{% static 'svg/Logo Principal.svg'%}" class="logo img-fluid" alt="" width="90" height="84">
+          </a>
+      </div>
+      <div class="menu-bg" id="menu-bg"></div>
+    {% endif %}
 
 
     <section class="vh-100">

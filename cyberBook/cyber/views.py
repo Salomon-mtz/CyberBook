@@ -9,6 +9,7 @@ import sqlite3
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required   
 import hashlib
+from django.contrib.auth import logout
 
 def index(request):
     template = loader.get_template('cyber/index.html')
@@ -24,6 +25,7 @@ def signin(request):
         
         if user is not None:
             login(request, user)
+            messages.success(request, f"Logged succesfull for: {user.username}")
             return redirect('index')
         else:
             messages.success(request, ('Bad login'))
@@ -50,7 +52,14 @@ def signup(request):
     else:
         return render(request, 'cyber/signup.html', {})
 
-def contacto(request):
-    template = loader.get_template('cyber/contacto.html')
+@login_required
+def custom_logout(request):
+    logout(request)
+    messages.info(request, "Logged out successfully!")
+    return redirect('login')
+
+@login_required
+def reservas(request):
+    template = loader.get_template('cyber/reservas.html')
     context = {}
     return HttpResponse(template.render(context, request))

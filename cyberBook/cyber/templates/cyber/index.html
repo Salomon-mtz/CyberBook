@@ -34,30 +34,58 @@
     <div class"back container">
       <img src="{% static 'svg/Fondo.svg'%}" class="fondo img-fluid" >
     </div>
-
-    <div class="barraNav container">
-      <div id="menu">
-        <div id="menu-bar" onclick="menuOnClick()">
-          <div id="bar1" class="bar"></div>
-          <div id="bar2" class="bar"></div>
-          <div id="bar3" class="bar"></div>
+    {% csrf_token %}
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-secondary text-center" role="alert">
+          {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        <nav class="nav" id="nav">
-          <ul>
-            <li><a href="{% url 'index' %}">Inicio</a></li>
-            <li><a href="{% url 'login' %}">Login</a></li>
-            <li><a href="{% url 'signup' %}">Sign Up</a></li>
-            <li><a href="{% url 'contacto' %}">Contacto</a></li>
-          </ul>
-        </nav> 
-      </div>
-      <a class="brand" href="{% url 'index' %}">
-        <img src="{% static 'svg/Logo Principal.svg'%}" class="logo img-fluid" alt="" width="90" height="84">
-      </a>
+      {% endfor %}
+    {% endif %}
+    {% if user.is_authenticated %}
+      <div class="barraNav container">
+        <div id="menu">
+            <div id="menu-bar" onclick="menuOnClick()">
+                <div id="bar1" class="bar"></div>
+                <div id="bar2" class="bar"></div>
+                <div id="bar3" class="bar"></div>
+            </div>
+            <nav class="nav" id="nav">
+                <ul>
+                    <li><a href="{% url 'index' %}">Inicio</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href="{% url 'reservas' %}">Reserva</a></li>
+                </ul>
+            </nav> 
+        </div>
+        <a class="brand" href="{% url 'index' %}">
+          <img src="{% static 'svg/Logo Principal.svg'%}" class="logo img-fluid" alt="" width="90" height="84">
+        </a>
     </div>
     <div class="menu-bg" id="menu-bg"></div>
-
-
+    {% else %}
+      <div class="barraNav container">
+          <div id="menu">
+              <div id="menu-bar" onclick="menuOnClick()">
+                  <div id="bar1" class="bar"></div>
+                  <div id="bar2" class="bar"></div>
+                  <div id="bar3" class="bar"></div>
+              </div>
+              <nav class="nav" id="nav">
+                  <ul>
+                      <li><a href="{% url 'index' %}">Inicio</a></li>
+                      <li><a href="{% url 'login' %}">Login</a></li>
+                      <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                  </ul>
+              </nav> 
+          </div>
+          <a class="brand" href="{% url 'index' %}">
+            <img src="{% static 'svg/Logo Principal.svg'%}" class="logo img-fluid" alt="" width="90" height="84">
+          </a>
+      </div>
+      <div class="menu-bg" id="menu-bg"></div>
+    {% endif %}
     <section class="main container">
       <article class="description">
         <div class="main-title">
