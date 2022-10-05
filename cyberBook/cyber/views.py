@@ -10,6 +10,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required   
 import hashlib
 from django.contrib.auth import logout
+from django.shortcuts import render
+from rest_framework import viewsets
+from . serializers import EquiposSerializer, EspacioSerializer, ReservaSerializer, SoftwareSerializer
+from . models import Espacios, Softwares, Reservas, Equipos
 
 def index(request):
     template = loader.get_template('cyber/index.html')
@@ -63,3 +67,19 @@ def reservas(request):
     template = loader.get_template('cyber/reservas.html')
     context = {}
     return HttpResponse(template.render(context, request))
+
+class EspaciosViewSet(viewsets.ModelViewSet):
+    queryset = Espacios.objects.all().order_by('idEsp')
+    serializer_class = EspacioSerializer    
+    
+class SoftwaresViewSet(viewsets.ModelViewSet):
+    queryset = Softwares.objects.all().order_by('idSoft')
+    serializer_class = SoftwareSerializer  
+
+class ReservaViewSet(viewsets.ModelViewSet):
+    queryset = Reservas.objects.all().order_by('id')
+    serializer_class = ReservaSerializer  
+
+class EquiposViewSet(viewsets.ModelViewSet):
+    queryset = Equipos.objects.all().order_by('idEq')
+    serializer_class = EquiposSerializer  

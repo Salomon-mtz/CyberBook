@@ -9,7 +9,7 @@ class Espacios(models.Model):
     tiempoEsp = models.IntegerField()
     disponibleEsp = models.BooleanField()
     capacidad = models.IntegerField()
-    fechaEsp = models.CharField(max_length=30, default=0)
+    fechaEsp = models.DateTimeField(max_length=30, default=0)
 
 class Softwares(models.Model):
     idSoft = models.CharField(primary_key=True, max_length=50, default=0)
@@ -26,3 +26,11 @@ class Reservas(models.Model):
     numS = models.CharField(max_length=50, default=0)
     estatus = models.BooleanField()
     tiempoRes = models.IntegerField()
+
+class Equipos(models.Model):
+    idEq = models.CharField(primary_key=True, max_length=50, default=0)
+    fechaEq = models.CharField(max_length=30, default=0)
+    tipoEq = models.CharField(max_length=20, default=0)
+    caracteristicas = models.CharField(max_length=50, default=0)
+    tiempoEq = models.IntegerField()
+    disponibleEq = models.BooleanField()
