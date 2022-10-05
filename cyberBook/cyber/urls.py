@@ -2,6 +2,10 @@ from django.urls import path
 from . import views
 from django.urls import include, path
 from rest_framework import routers
+from django.conf.urls.static import static
+from django.conf import settings
+from cyber import views
+
 router = routers.DefaultRouter()
 router.register(r'espacios', views.EspaciosViewSet)
 router.register(r'softwares', views.SoftwaresViewSet)
@@ -19,4 +23,9 @@ urlpatterns = [
     path('softwares/', include('rest_framework.urls', namespace='rest_framework2')),
     path('reservaUser/', include('rest_framework.urls', namespace='rest_framework3')),
     path('equipos/', include('rest_framework.urls', namespace='rest_framework4')),
+    path('espacios/<int:id>', views.espacios),
+    path('softwares/<int:id>', views.software),
+    path('equipos/<int:id>', views.equipos),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

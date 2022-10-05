@@ -27,6 +27,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.17/dist/css/splide.min.css">
     
     <title>Reservas</title>
+    <style type="text/css">
+      .espacio {
+        width: 25%;
+        margin: 50px;
+        text-align: center;
+      }
+      .container {
+        display: flex;
+      }
+    </style>
   </head>
   <body>
 
@@ -79,9 +89,51 @@
       </div>
       <div class="menu-bg" id="menu-bg"></div>
     {% endif %}
+    <h1 class="cyber">Reservas:</h1>
+    <section class="main container">
+      <h2 style="color:white">Espacios:</h2>
+      <article class="description2">
+        <div class="container">
+          {% for espacio in espacios %}
+          <div class="espacio">
+          <h2 style="color:white" >{{espacio.nombreEspacio}}</h2>
+          <img src="{{ espacio.imageEsp.url  }}" style="height:300px;width:220px;"/>
+          <h4 style="color:white; margin-top: 10px;" >{{espacio.caracteristicas}}</h4>
+          </div>
+          {% endfor %}
+        </div>
+      </article>
+    </section>
+    <section class="main container">
+      <h2 style="color:black">Software:</h2>
+      <article class="description2">
+        <div class="container">
+          {% for software in softwares %}
+          <div class="espacio">
+          <h2 style="color:black" >{{software.tipoSoft}}</h2>
+          <img src="{{ software.imageSoft.url  }}" style="height:300px;width:220px;"/>
+          <h4 style="color:black; margin-top: 10px;" >{{software.caracteristicas}}</h4>
+          </div>
+          {% endfor %}
+        </div>
+      </article>
+    </section>
+    <section class="main container">
+      <h2 style="color:black">Equipos:</h2>
+      <article class="description2">
+        <div class="container">
+          {% for equipo in equipos %}
+          <div class="espacio">
+          <h2 style="color:black" >{{equipo.tipoEq}}</h2>
+          <img src="{{ equipo.imageEq.url  }}" style="height:300px;width:220px;"/>
+          <h4 style="color:black; margin-top: 10px;" >{{equipo.caracteristicas}}</h4>
+          </div>
+          {% endfor %}
+        </div>
+      </article>
+    </section>
 
 
-   
     <script src="{% static 'css/jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'css/bootstrap/dist/js/bootstrap.min.js'%}"></script>
 
