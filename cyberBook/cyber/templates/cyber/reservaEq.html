@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{% static 'css/styles.css'%}">
     <link rel="stylesheet" href="{% static 'css/open-iconic/font/css/open-iconic-bootstrap.min.css'%}">
     <link rel="stylesheet" href="{% static 'css/bootstrap-icons/font/bootstrap-icons.css'%}"> 
-
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,20 +28,10 @@
     
     <title>Reservas</title>
     <style type="text/css">
-      .espacio {
-        width: 25%;
-        margin: 50px;
-        text-align: center;
-      }
-      .containerCard {
-        display: flex;
-      }
-      .title {
-        margin-top: 20px;
-      }
-      .maincontainer{
-        margin-top: 30px;
-      }
+        .bootstrap-timepicker-meridian, .meridian-column
+        {
+            display: none;
+        }
     </style>
   </head>
   <body>
@@ -95,81 +85,26 @@
       </div>
       <div class="menu-bg" id="menu-bg"></div>
     {% endif %}
-
-
-    <section class="main container">
-      <h2 class = "title" style="color:white">Espacios:</h2>
-      <article class="description2">
-        <div class="containerCard">
-          {% for espacio in espacios %}
-          <div class="espacio row">
-            <div class="col">
-              <div class="card bg-light">
-                <div class="text-center">
-                  <a href="/reservaEsp/{{ espacio.id }}">
-                    <img class="img-fluid" src="{{ espacio.imageEsp.url  }}" style="height:300px;width:220px;"/>
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h2 style="color:#021C51" >{{espacio.nombreEspacio}}</h2>
-                  <h4 style="color:#021C51; margin-top: 10px;" >{{espacio.caracteristicas}}</h4>
-                </div>
-              </div>
-            </div>   
-        </div>
-          {% endfor %}
-      </article>
-    </section>
     
     <section class="main container">
-      <h2 class = "title" style="color:white">Software:</h2>
-      <article class="description2">
-        <div class="containerCard">
-          {% for software in softwares %}
-          <div class="espacio row">
-            <div class="col">
-              <div class="card bg-light">
-                <div class="text-center">
-                  <a href="/reservaSoft/{{ software.id }}">
-                    <img class="img-fluid" src="{{ software.imageSoft.url  }}" style="height:300px;width:220px;"/>
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h2 style="color:#021C51" >{{software.tipoSoft}}</h2>
-                  <h4 style="color:#021C51; margin-top: 10px;" >{{software.caracteristicas}}</h4>
-                </div>
-              </div>
-            </div>   
+      <article class="description">
+        <div class="main-title">
+          <h1 class="cyber">{{equipos.tipoEq}}</h1>
         </div>
-          {% endfor %}
       </article>
     </section>
 
-
-    <section class="main container">
-      <h2 class = "title" style="color:black">Equipos:</h2>
-      <article class="description2">
-        <div class="containerCard">
-          {% for equipo in equipos %}
-          <div class="espacio row">
-            <div class="col">
-              <div class="card bg-light">
-                <div class="text-center">
-                  <a href="/reservaEq/{{ equipo.id }}">
-                    <img class="img-fluid" src="{{ equipo.imageEq.url  }}" style="height:300px;width:220px;"/>
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h2 style="color:#021C51" >{{equipo.tipoEq}}</h2>
-                  <h4 style="color:#021C51; margin-top: 10px;" >{{equipo.caracteristicas}}</h4>
-                </div>
-              </div>
-            </div>   
+    <form class="container">
+        <div class="form-group col-md-2">
+            <label for="inputZip" style="color:white">Día:</label>
+            <input type="date" class="date form-control" id="inputZip" data-date-format="YYYY/MM/DD">
         </div>
-          {% endfor %}
-      </article>
-    </section>
-
+        <div class="col-auto my-5">
+            <label for="quantity" style="color:white">Número de horas:</label>
+            <input type="number" id="quantity" name="quantity" min="1" max={{equipos.tiempoEq}}>
+          </div>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </form>
 
     <script src="{% static 'css/jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'css/bootstrap/dist/js/bootstrap.min.js'%}"></script>
@@ -182,7 +117,9 @@
       }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.17/dist/js/splide.min.js"></script>
+    <script type="text/javascript">
+        var selld = document.getElementById("selecteId");
+    </script>
 
-      
   </body>
 </html>

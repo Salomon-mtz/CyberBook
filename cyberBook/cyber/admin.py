@@ -4,13 +4,13 @@ from .models import Softwares
 from .models import Reservas
 
 class EspaciosAdmin(admin.ModelAdmin):
-    readonly_fields = ('idEsp',)
+    readonly_fields = ('id',)
 
 class SoftwareAdmin(admin.ModelAdmin):
-    readonly_fields = ('idSoft',)
+    readonly_fields = ('id',)
 
 class EquiposAdmin(admin.ModelAdmin):
-    readonly_fields = ('idEq',)
+    readonly_fields = ('id',)
 
 admin.site.register(Espacios, EspaciosAdmin)
 admin.site.register(Softwares)

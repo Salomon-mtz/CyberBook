@@ -26,6 +26,9 @@ urlpatterns = [
     path('espacios/<int:id>', views.espacios),
     path('softwares/<int:id>', views.software),
     path('equipos/<int:id>', views.equipos),
+    path('reservaEsp/<int:espacio_id>', views.reservaEsp, name='reservaEsp'),
+    path('reservaEq/<int:equipo_id>', views.reservaEq, name='reservaEq'),
+    path('reservaSoft/<int:software_id>', views.reservaSoft, name='reservaSoft'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

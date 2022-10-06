@@ -4,23 +4,22 @@ from django.db import models
 
 # Create your models here.
 class Espacios(models.Model):
-    idEsp = models.CharField(primary_key=True, max_length=50, default=0)
+    id = models.AutoField(primary_key=True)
     nombreEspacio = models.CharField(max_length=30, default=0)
     caracteristicas = models.CharField(max_length=500, default=0)
-    tiempoEsp = models.IntegerField()
-    tipoEsp = models.CharField(max_length=20, default=0)
-    disponibleEsp = models.BooleanField()
-    capacidad = models.IntegerField()
+    tiempoEsp = models.CharField(max_length=500, default=0)
+    disponibleEsp = models.CharField(max_length=500, default=0)
+    capacidad = models.CharField(max_length=500, default=0)
     fechaEsp = models.CharField(max_length=30, default=0)
     imageEsp = models.ImageField(upload_to='cyber/static', default='')
 
 class Softwares(models.Model):
-    idSoft = models.CharField(primary_key=True, max_length=50, default=0)
+    id = models.AutoField(primary_key=True)
     fechaSoft = models.CharField(max_length=30, default=0)
     tipoSoft = models.CharField(max_length=20, default=0)
     caracteristicas = models.CharField(max_length=50, default=0)
-    tiempoSoft = models.IntegerField()
-    disponibleSoft = models.BooleanField()
+    tiempoSoft = models.CharField(max_length=500, default=0)
+    disponibleSoft = models.CharField(max_length=500, default=0)
     imageSoft = models.ImageField(upload_to='cyber/static', default='')
 
 class Reservas(models.Model):
@@ -28,14 +27,14 @@ class Reservas(models.Model):
     fecha = models.CharField(max_length=30, default=0)
     tipoRes = models.CharField(max_length=20, default=0)
     numS = models.CharField(max_length=50, default=0)
-    estatus = models.BooleanField()
-    tiempoRes = models.IntegerField()
+    estatus = models.CharField(max_length=500, default=0)
+    tiempoRes = models.CharField(max_length=500, default=0)
 
 class Equipos(models.Model):
-    idEq = models.CharField(primary_key=True, max_length=50, default=0)
+    id = models.AutoField(primary_key=True)
     fechaEq = models.CharField(max_length=30, default=0)
     tipoEq = models.CharField(max_length=20, default=0)
     caracteristicas = models.CharField(max_length=50, default=0)
-    tiempoEq = models.IntegerField()
-    disponibleEq = models.BooleanField()
+    tiempoEq = models.CharField(max_length=500, default=0)
+    disponibleEq = models.CharField(max_length=500, default=0)
     imageEq = models.ImageField(upload_to='cyber/static', default='')

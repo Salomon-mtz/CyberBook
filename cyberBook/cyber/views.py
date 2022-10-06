@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import Http404, HttpResponse
 from django.template import loader 
 from .forms import NewUserForm
@@ -72,11 +72,11 @@ def reservas(request, *args, **kwargs):
     return render(request, 'cyber/reservas.html', ctx)
 
 class EspaciosViewSet(viewsets.ModelViewSet):
-    queryset = Espacios.objects.all().order_by('idEsp')
+    queryset = Espacios.objects.all().order_by('id')
     serializer_class = EspacioSerializer    
     
 class SoftwaresViewSet(viewsets.ModelViewSet):
-    queryset = Softwares.objects.all().order_by('idSoft')
+    queryset = Softwares.objects.all().order_by('id')
     serializer_class = SoftwareSerializer  
 
 class ReservaViewSet(viewsets.ModelViewSet):
@@ -84,7 +84,7 @@ class ReservaViewSet(viewsets.ModelViewSet):
     serializer_class = ReservaSerializer  
 
 class EquiposViewSet(viewsets.ModelViewSet):
-    queryset = Equipos.objects.all().order_by('idEq')
+    queryset = Equipos.objects.all().order_by('id')
     serializer_class = EquiposSerializer  
 
 def espacios(request, espacios_id):
@@ -107,3 +107,18 @@ def equipos(request, equipos_id):
         return render(request, 'cyber/reservas.html', {'equipos':equipos})
     else:
         raise Http404('Imagen no existe')
+
+def reservaEsp(request, espacio_id, *args, **kwargs):
+    espacios = Espacios.objects.get(pk=espacio_id)
+    ctx = {'espacios': espacios}
+    return render(request, 'cyber/reservaEsp.html', ctx)
+
+def reservaSoft(request, software_id, *args, **kwargs):
+    softwares = Softwares.objects.get(pk=software_id)
+    ctx = {'softwares': softwares}
+    return render(request, 'cyber/reservaSoft.html', ctx)
+
+def reservaEq(request, equipo_id, *args, **kwargs):
+    equipos = Equipos.objects.get(pk=equipo_id)
+    ctx = {'equipos': equipos}
+    return render(request, 'cyber/reservaEq.html', ctx)
