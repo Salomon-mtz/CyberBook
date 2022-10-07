@@ -122,3 +122,14 @@ def reservaEq(request, equipo_id, *args, **kwargs):
     equipos = Equipos.objects.get(pk=equipo_id)
     ctx = {'equipos': equipos}
     return render(request, 'cyber/reservaEq.html', ctx)
+
+@login_required
+def profile(request, *args, **kwargs):
+
+    #Conexión con la base de datos
+    mydb = sqlite3.connect("db.sqlite3")
+    curr = mydb.cursor()
+
+    user = User.objects.all()
+    ctx = {'user': user}
+    return render(request, 'cyber/profile.html', ctx)
