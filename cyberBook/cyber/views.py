@@ -9,12 +9,36 @@ import sqlite3
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required   
 import hashlib
+from random import randint
+import smtplib
 from django.contrib.auth import logout
 from django.shortcuts import render
 from rest_framework import viewsets
 from . serializers import EquiposSerializer, EspacioSerializer, ReservaSerializer, SoftwareSerializer
 from . models import Espacios, Softwares, Reservas, Equipos
 from .models import Espacios
+from django.template.loader import get_template
+from django.core.mail import EmailMultiAlternatives
+from django.conf import settings
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from ast import Delete
+from email import header
+from email.mime.text import MIMEText
+from queue import Empty
+import json
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, JsonResponse, HttpResponseNotFound
+from django.views.decorators.csrf import csrf_exempt
+from json import loads, dumps
+from django.contrib.auth import authenticate, login as loginUser, logout
+from django.contrib.auth.decorators import login_required
+import datetime
+import sqlite3
+from rest_framework import viewsets
+import smtplib
+
+
 
 def index(request):
     template = loader.get_template('cyber/index.html')
@@ -39,17 +63,52 @@ def signin(request):
     else:
         return render(request, 'cyber/login.html', {})
 
+def send_email(email):
+    context = {'email':email}
+    template = get_template('cyber/email.html')
+    content = template.render(context)
+    email = EmailMultiAlternatives(
+        'Correo de verificación',
+        'Codigo de verificación',
+        settings.EMAIL_HOST_USER,
+        [email],
+    )
+    email.attach_alternative(content, 'text/html')
+    email.send(email)
+
+@csrf_exempt
+def verificaEmail(request):
+    if request.method == 'POST':
+        code = request.POST['code']
+        if code is not "":
+            if code == "512369" or code == 512369:
+
+                messages.error(request, ('Registro exitoso'))
+                return redirect('login')
+            else:
+                deleteUserEmail(request)
+                messages.error(request, ('Error en codigo inteta de nuevo'))
+                return redirect('index')
+        else:
+            messages.error(request, ('Ingresa un codigo'))
+            return render(request, 'cyber/verificaEmail.html')
+    else:
+        return render(request, 'cyber/verificaEmail.html')
+
+@csrf_exempt
 def signup(request):
     if request.method == "POST":
         form = NewUserForm(request.POST)
         username = request.POST['username']
         pwd = request.POST['password1']
+        email = request.POST["email"]
+        send_email(email)
         if form.is_valid():
             user = form.save()
             user = authenticate(request, username=username, password=pwd)
             login(request, user)
             messages.success(request, ('Registro éxitoso'))
-            return redirect("index")
+            return redirect("verificaEmail")
         else:
             messages.error(request, "Registro fallido")
             print(form.errors)
@@ -133,3 +192,12 @@ def profile(request, *args, **kwargs):
     user = User.objects.all()
     ctx = {'user': user}
     return render(request, 'cyber/profile.html', ctx)
+
+def deleteUserEmail(request):
+    request.user.delete()
+    return redirect('login')
+
+def deleteUser(request):
+    request.user.delete()
+    messages.success(request, "Cuenta eliminada")
+    return redirect('login')
