@@ -8,7 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 import sqlite3
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required   
-import hashlib
+from django.views import generic
+from django.views.generic import DetailView
 from random import randint
 import smtplib
 from django.contrib.auth import logout
@@ -27,6 +28,7 @@ from email import header
 from email.mime.text import MIMEText
 from queue import Empty
 import json
+from .forms import UserUpdateForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse, HttpResponseNotFound
 from django.views.decorators.csrf import csrf_exempt
@@ -38,7 +40,7 @@ import sqlite3
 from rest_framework import viewsets
 import smtplib
 
-
+codigo = ""
 
 def index(request):
     template = loader.get_template('cyber/index.html')
@@ -63,8 +65,8 @@ def signin(request):
     else:
         return render(request, 'cyber/login.html', {})
 
-def send_email(email):
-    context = {'email':email}
+def send_email(email, codigo):
+    context = {'email':email, 'codigo':codigo}
     template = get_template('cyber/email.html')
     content = template.render(context)
     email = EmailMultiAlternatives(
@@ -78,13 +80,17 @@ def send_email(email):
 
 @csrf_exempt
 def verificaEmail(request):
+    if request.method == 'GET':
+        global codigo
+        codigo = str(randint(1000, 6000))
+        send_email(request.user.email, codigo)
     if request.method == 'POST':
         code = request.POST['code']
         if code is not "":
-            if code == "512369" or code == 512369:
+            if code == codigo:
 
                 messages.error(request, ('Registro exitoso'))
-                return redirect('login')
+                return redirect('index')
             else:
                 deleteUserEmail(request)
                 messages.error(request, ('Error en codigo inteta de nuevo'))
@@ -102,17 +108,21 @@ def signup(request):
         username = request.POST['username']
         pwd = request.POST['password1']
         email = request.POST["email"]
-        send_email(email)
-        if form.is_valid():
-            user = form.save()
-            user = authenticate(request, username=username, password=pwd)
-            login(request, user)
-            messages.success(request, ('Registro éxitoso'))
-            return redirect("verificaEmail")
-        else:
-            messages.error(request, "Registro fallido")
+        if User.objects.filter(email=email).exists():
+            messages.success(request, ('correo ya registrado'))
             print(form.errors)
             return render(request, 'cyber/signup.html', {'form': form})
+        else:
+            if form.is_valid():
+                user = form.save()
+                user = authenticate(request, username=username, password=pwd, email=email)
+                login(request, user)
+                messages.success(request, ('Registro éxitoso'))
+                return redirect("verificaEmail")
+            else:
+                messages.error(request, "Registro fallido")
+                print(form.errors)
+                return render(request, 'cyber/signup.html', {'form': form})
     else:
         return render(request, 'cyber/signup.html', {})
 
@@ -182,16 +192,8 @@ def reservaEq(request, equipo_id, *args, **kwargs):
     ctx = {'equipos': equipos}
     return render(request, 'cyber/reservaEq.html', ctx)
 
-@login_required
 def profile(request, *args, **kwargs):
-
-    #Conexión con la base de datos
-    mydb = sqlite3.connect("db.sqlite3")
-    curr = mydb.cursor()
-
-    user = User.objects.all()
-    ctx = {'user': user}
-    return render(request, 'cyber/profile.html', ctx)
+    return render(request, 'cyber/profile.html')
 
 def deleteUserEmail(request):
     request.user.delete()
@@ -201,3 +203,28 @@ def deleteUser(request):
     request.user.delete()
     messages.success(request, "Cuenta eliminada")
     return redirect('login')
+
+
+def edit_profile(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST["email"]
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        if User.objects.filter(email=email).exists():
+            messages.success(request, ('correo ya registrado'))
+            print(u_form.errors)
+            return render(request, 'cyber/edit_profile.html', {'u_form': u_form})
+        else:
+            if u_form.is_valid():
+                print("Entra")
+                u_form.save()
+                return redirect('profile')
+    else:
+        messages.error(request, "Registro fallido")
+        u_form = UserUpdateForm(instance=request.user)
+
+    ctx = {
+        'u_form': u_form,
+    }
+    return render(request, 'cyber/edit_profile.html', ctx)
+

@@ -19,6 +19,7 @@ urlpatterns = [
     path('logout/', views.custom_logout, name='logout'),
     path('reservas/', views.reservas, name='reservas'),
     path('profile/', views.profile, name='profile'),
+    path('edit_profile/', views.edit_profile, name='edit_profile'),
     path('verificaEmail/', views.verificaEmail, name='verificaEmail'),
     path('', include(router.urls)),
     path('espacios/', include('rest_framework.urls', namespace='rest_framework1')),
