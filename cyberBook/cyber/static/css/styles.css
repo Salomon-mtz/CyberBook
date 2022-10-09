@@ -193,6 +193,14 @@ img.screen1{
     font-weight: 700;
 }
 
+.cyber2{
+    font-size: 80px;
+    color: white;
+    font-weight: 700;
+    margin-left: 700px;
+}
+
+
 /* Fuentes Botón Descarga */
 .downloadTxt{
     font-size: 20px;
@@ -202,6 +210,11 @@ img.screen1{
     font-size: 20px;
     color: white;
 }
+.subtitle2{
+    font-size: 20px;
+    color: black;
+}
+
 
 /* Fuentes Hub de Ciberseguridad */
 .title{

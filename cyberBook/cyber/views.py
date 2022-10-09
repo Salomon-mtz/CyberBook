@@ -192,8 +192,10 @@ def reservaEq(request, equipo_id, *args, **kwargs):
     ctx = {'equipos': equipos}
     return render(request, 'cyber/reservaEq.html', ctx)
 
-def profile(request, *args, **kwargs):
-    return render(request, 'cyber/profile.html')
+def profile(request):
+    reservas = Reservas.objects.filter(user_id = request.user)
+    ctx = {'reservas': reservas}
+    return render(request, 'cyber/profile.html', ctx)
 
 def deleteUserEmail(request):
     request.user.delete()

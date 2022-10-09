@@ -32,6 +32,20 @@
         {
             display: none;
         }
+        .espacio {
+            width: 25%;
+            margin: 50px;
+            text-align: center;
+        }
+        .containerCard {
+            display: flex;
+        }
+        .title {
+            margin-top: 20px;
+        }
+        .maincontainer{
+            margin-top: 30px;
+        }
     </style>
   </head>
   <body>
@@ -84,89 +98,45 @@
     {% endif %}
     
     <section class="main container">
-        <div class="container py-5 h-100">
-        <div class="row d-flex align-items-center h-100">
-            <div class="col col-lg-9 col-xl-7">
+        <article class="description"></article>
+            <div class="container py-5 h-100">
+            <div class="row d-flex align-items-center h-100">
+                <div class="col col-lg-9 col-xl-7">
+                    <div class="main-title">
+                        <h1 class="cyber">{{ request.user.username }}</h1>
+                        <h3 class="subtitle">{{ request.user.email }}</h3>
+                        <div class="downloadBtn" style="text-align:start">
+                            <button type="button" class="btn download"><span class="downloadTxt">Editar Perfil</span></button>
+                        </div>
+                    </div>
+                </div>
             <div>
-                <div class="rounded-top text-white d-flex flex-row" style="height:200px; ">
-                <div class="ms-3" style="margin-top: 40px;">
-                    <h5 class="cyber">{{ request.user.username }}</h5>
-                    <p>{{ request.user.email }}</p>
-                </div>
-                </div>
-                <section class="hub container">
-                    <article class="cyberHub">
-                      <div>
-                        <h1 class="title">¿Qué es el Hub de Ciberseguiridad?</h1>
-                        <h3 class="explanation">
-                          Lorem Ipsum is simply dummy text of the printing and typesetting 
-                          industry. Lorem Ipsum has been the industry's standard dummy text
-                          ever since the 1500s, when an unknown printer took a galley of 
-                          type and scrambled it to make a type specimen book. It has 
-                          survived not only five centuries, but also the leap into e
-                          lectronic typesetting, remaining essentially unchanged. It 
-                          was popularised in the 1960s with the release of Letraset 
-                          sheets containing Lorem Ipsum passages, and more recently 
-                          with desktop publishing software like Aldus PageMaker including 
-                          versions of Lorem Ipsum.
-                        </h3>
-                      </div>
-                    </article>
-                  </section>
-                <div class="p-4 text-black">
-                <div class="d-flex justify-content-end text-center py-1">
-                    <div>
-                    <p class="mb-1 h5">253</p>
-                    <p class="small text-muted mb-0">Photos</p>
-                    </div>
-                    <div class="px-3">
-                    <p class="mb-1 h5">1026</p>
-                    <p class="small text-muted mb-0">Followers</p>
-                    </div>
-                    <div>
-                    <p class="mb-1 h5">478</p>
-                    <p class="small text-muted mb-0">Following</p>
-                    </div>
-                </div>
-                </div>
-                <div class="card-body p-4 text-black">
-                <div class="mb-5">
-                    <p class="lead fw-normal mb-1">About</p>
-                    <div class="p-4" style="background-color: #f8f9fa;">
-                    <p class="font-italic mb-1">Web Developer</p>
-                    <p class="font-italic mb-1">Lives in New York</p>
-                    <p class="font-italic mb-0">Photographer</p>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <p class="lead fw-normal mb-0">Recent photos</p>
-                    <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
-                </div>
-                <div class="row g-2">
-                    <div class="col mb-2">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
-                        alt="image 1" class="w-100 rounded-3">
-                    </div>
-                    <div class="col mb-2">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
-                        alt="image 1" class="w-100 rounded-3">
-                    </div>
-                </div>
-                <div class="row g-2">
-                    <div class="col">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
-                        alt="image 1" class="w-100 rounded-3">
-                    </div>
-                    <div class="col">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
-                        alt="image 1" class="w-100 rounded-3">
-                    </div>
-                </div>
-                </div>
             </div>
+        </article>
+    </section>
+    <section class="main container">
+            <div class="main-title">
+                <h1 class="cyber2">Reservaciones:</h1>
             </div>
-        </div>
-        </div>
+    </section>
+    <section class="main container">
+        <article class="description2">
+          <div class="containerCard">
+            {% for reserva in reservas %}
+            <div class="espacio row">
+              <div class="col">
+                <div class="card bg-light">
+                  <div class="card-body">
+                    <h1 style="color:#021C51; margin-top: 10px;" >{{reserva.tipoRes}}</h1>
+                    <h2 style="color:#021C51" >Estatus: {{reserva.estatus}}</h2>
+                    <h3 style="color:#021C51; margin-top: 10px;" >Fecha: {{reserva.fecha}}</h3>
+                    <h3 style="color:#021C51; margin-top: 10px;" >Tiempo: {{reserva.tiempoRes}}</h3>
+                  </div>
+                </div>
+              </div>   
+          </div>
+            {% endfor %}
+        </article>
       </section>
 
     <script src="{% static 'css/jquery/dist/jquery.min.js' %}"></script>

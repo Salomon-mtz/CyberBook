@@ -30,6 +30,8 @@ class Reservas(models.Model):
     numS = models.CharField(max_length=50, default=0)
     estatus = models.CharField(max_length=500, default=0)
     tiempoRes = models.CharField(max_length=500, default=0)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
+
 
 class Equipos(models.Model):
     id = models.AutoField(primary_key=True)
