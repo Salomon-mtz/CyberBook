@@ -16,7 +16,7 @@ from django.contrib.auth import logout
 from django.shortcuts import render
 from rest_framework import viewsets
 from . serializers import EquiposSerializer, EspacioSerializer, ReservaSerializer, SoftwareSerializer
-from . models import Espacios, Softwares, Reservas, Equipos
+from . models import Espacios, Softwares, Reservas, Equipos, Usuarios
 from .models import Espacios
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
@@ -39,6 +39,9 @@ import datetime
 import sqlite3
 from rest_framework import viewsets
 import smtplib
+from django.contrib.auth import logout, login as auth_login, authenticate
+import hashlib
+
 
 codigo = ""
 
@@ -108,15 +111,19 @@ def signup(request):
         username = request.POST['username']
         pwd = request.POST['password1']
         email = request.POST["email"]
-        if User.objects.filter(email=email).exists():
+        nombre2 = username
+        if Usuarios.objects.filter(email=email).exists():
             messages.success(request, ('correo ya registrado'))
             print(form.errors)
             return render(request, 'cyber/signup.html', {'form': form})
         else:
             if form.is_valid():
+                contraseña1 = hashlib.sha256(pwd.encode())
+                contraseña2 = contraseña1.hexdigest()
+                user2 = Usuarios.objects.create(username = nombre2, password = contraseña2, email = email)
                 user = form.save()
                 user = authenticate(request, username=username, password=pwd, email=email)
-                login(request, user)
+                auth_login(request, user)
                 messages.success(request, ('Registro éxitoso'))
                 return redirect("verificaEmail")
             else:
@@ -193,11 +200,16 @@ def reservaEq(request, equipo_id, *args, **kwargs):
     return render(request, 'cyber/reservaEq.html', ctx)
 
 def profile(request):
-    reservas = Reservas.objects.filter(user_id = request.user)
+    query = Usuarios.objects.get(email = request.user.email)
+    reservas = Reservas.objects.filter(user_id = query)
     ctx = {'reservas': reservas}
     return render(request, 'cyber/profile.html', ctx)
 
+@csrf_exempt
 def deleteUserEmail(request):
+    print(request.user.email)
+    query = Usuarios.objects.get(email = request.user.email)
+    query.delete()
     request.user.delete()
     return redirect('login')
 
@@ -210,20 +222,25 @@ def deleteUser(request):
 def edit_profile(request):
     if request.method == 'POST':
         username = request.POST['username']
-        email = request.POST["email"]
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        if User.objects.filter(email=email).exists():
-            messages.success(request, ('correo ya registrado'))
-            print(u_form.errors)
-            return render(request, 'cyber/edit_profile.html', {'u_form': u_form})
+        password = request.POST['password']
+        query = Usuarios.objects.get(email = request.user.email)
+        u_form = UserUpdateForm(request.POST, instance=query)
+        u = request.user
+        if u_form.is_valid():
+            u_form.save()
+            u.set_password(password)
+            u.username = username
+            u.save()
+            messages.success(request, ('Inicia Sesión para verificar tu nueva contraseña:'))
+            return redirect('login')
         else:
-            if u_form.is_valid():
-                print("Entra")
-                u_form.save()
-                return redirect('profile')
+            messages.error(request, "Registro fallido")
+            print(u_form.errors)
+
     else:
+        query = Usuarios.objects.get(email = request.user.email)
         messages.error(request, "Registro fallido")
-        u_form = UserUpdateForm(instance=request.user)
+        u_form = UserUpdateForm(instance=query)
 
     ctx = {
         'u_form': u_form,

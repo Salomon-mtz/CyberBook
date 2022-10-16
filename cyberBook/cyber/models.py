@@ -4,6 +4,22 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+
+class Usuarios(models.Model):
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=30, default=0)
+    password = models.CharField(max_length=50, default=0)
+    email = models.CharField(max_length=50, default=0)
+    
+    def toJson(self):
+        a = {
+        'name': self.username,
+        'email': self.email,
+        'password': self.password,
+        }
+        return a
+    
+
 class Espacios(models.Model):
     id = models.AutoField(primary_key=True)
     nombreEspacio = models.CharField(max_length=30, default=0)
@@ -30,7 +46,7 @@ class Reservas(models.Model):
     numS = models.CharField(max_length=50, default=0)
     estatus = models.CharField(max_length=500, default=0)
     tiempoRes = models.CharField(max_length=500, default=0)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
+    user_id = models.ForeignKey(Usuarios, on_delete=models.CASCADE, default=0)
 
 
 class Equipos(models.Model):

@@ -106,7 +106,9 @@
                         <h1 class="cyber">{{ request.user.username }}</h1>
                         <h3 class="subtitle">{{ request.user.email }}</h3>
                         <div class="downloadBtn" style="text-align:start">
+                          <a href="{% url 'edit_profile' %}">
                             <button type="button" class="btn download"><span class="downloadTxt">Editar Perfil</span></button>
+                          </a>
                         </div>
                     </div>
                 </div>
