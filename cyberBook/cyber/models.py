@@ -1,6 +1,7 @@
 from email.policy import default
 from unittest.util import _MAX_LENGTH
 from django.db import models
+from distutils.command.upload import upload
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -10,12 +11,18 @@ class Usuarios(models.Model):
     username = models.CharField(max_length=30, default=0)
     password = models.CharField(max_length=50, default=0)
     email = models.CharField(max_length=50, default=0)
+    phone = models.CharField(max_length=50, default=0)
+    school = models.CharField(max_length=50, default=0)
+    rol = models.CharField(max_length=50, default=0)
     
     def toJson(self):
         a = {
-        'name': self.username,
+        'name': self.nombre,
         'email': self.email,
         'password': self.password,
+        'phone': self.phone,
+        'school': self.school,
+        'rol': self.rol,
         }
         return a
     
@@ -40,13 +47,13 @@ class Softwares(models.Model):
     imageSoft = models.ImageField(upload_to='cyber/static', default='')
 
 class Reservas(models.Model):
-    id = models.AutoField(primary_key=True)
     fecha = models.CharField(max_length=30, default=0)
     tipoRes = models.CharField(max_length=20, default=0)
-    numS = models.CharField(max_length=50, default=0)
     estatus = models.CharField(max_length=500, default=0)
     tiempoRes = models.CharField(max_length=500, default=0)
     user_id = models.ForeignKey(Usuarios, on_delete=models.CASCADE, default=0)
+    codigo = models.CharField(max_length=50, default=0)
+    idServicio = models.CharField(max_length=50, default=0)
 
 
 class Equipos(models.Model):
