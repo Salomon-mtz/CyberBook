@@ -101,24 +101,54 @@
                       <h2 class = "errors" style="color: white; font-size: 20px; font-weight: 700;">{{ form.errors }}</h2>
                     </div>
                   {% endif %}
-                    <div class="form-group">
+                    <div class="mb-4">
                       <label for="exampleInputEmail1" style="color: white; font-size: 30px; font-weight: 700;">Nombre de Usuario Nuevo</label>
                       <input class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp" placeholder="{{ request.user.username }}">
                     </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword1" style="color: white; font-size: 30px; font-weight: 700;">Contraseña Nueva</label>
-                      <input class="form-control" name="password" id="exampleInputPassword1" placeholder="Contraseña">
+                    <div class="mb-4">
+                      <label for="validationCustom01" class="form-label" style="color: white; font-size: 30px; font-weight: 700;">Teléfono</label>
+                      <input class="form-control" id="validationCustom01" placeholder="Ingresa tu número telefónico" name="telefono" required>
                     </div>
+                    <div class="mb-4">
+                      <label for="validationCustom01" class="form-label" style="color: white; font-size: 30px; font-weight: 700;">Rol</label>
+                      <input class="form-control" id="validationCustom01" placeholder="Ingresa tu rol" name="rol" required>
+                    </div>
+                    <div class="mb-4">
+                      <label for="validationCustom01" class="form-label" style="color: #021C51; font-size: 30px; font-weight: 700;">Escuela</label>
+                      <input class="form-control" id="validationCustom01" placeholder="Ingresa tu Escuela" name="escuela" required>
+                    </div>
+                    <div class="mb-4">
+                      <label for="validationPassword" style="color: #021C51; font-size: 30px; font-weight: 700;">Password</label>
+                      <input type="password" class="form-control" id="validationPassword" minlength="8" placeholder="Password" name="contraseña" required>
+                      <div  class="progress mt-2" style="height: 5px;">
+                          <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      
+                      <small id="passwordHelpBlock" class="form-text text-muted">
+                          Tu contraseña debe tener 8-20 caracteres, debe contener caracteres especiales "!@#$%&*_?", números, letras máyusculas y minúsculas
+                      </small>
+                  
+                      <div id="feedbackin" class="valid-feedback">
+                          Contraseña Fuerte
+                      </div>
+                      <div id="feedbackirn" class="invalid-feedback">
+                          Mínimo 8 caracteres
+                          Número, caracter especial
+                          Letra mayúscula y minúscula
+                      </div>                    
+                  </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+                <div data-arengu-form-id="166457203962622352"></div>
             </div>
           </div>
         </div>
       </section>
+      
     <script src="{% static 'css/jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'css/bootstrap/dist/js/bootstrap.min.js'%}"></script>
-
+  
     <script>
       function menuOnClick() {
         document.getElementById("menu-bar").classList.toggle("change");
@@ -128,7 +158,187 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.17/dist/js/splide.min.js"></script>
 
-    
+  
+    <script async src="https://sdk.arengu.com/forms.js"></script>
+
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function () {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms)
+          .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+              if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+              }
+
+              form.classList.add('was-validated')
+          }, false)
+          })
+      })()
+  </script>
+
+  <script>
+      (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              // making sure password enters the right characters
+                form.validationPassword.addEventListener('keypress', function(event){
+                    console.log("keypress");
+                    console.log("event.which: " + event.which);
+                    var checkx = true;
+                    var chr = String.fromCharCode(event.which);
+                    console.log("char: " + chr);
+                      
+        
+                    var matchedCase = new Array();
+                    matchedCase.push("[!@#$%&*_?]"); // Special Charector
+                    matchedCase.push("[A-Z]");      // Uppercase Alpabates
+                    matchedCase.push("[0-9]");      // Numbers
+                    matchedCase.push("[a-z]");
+        
+                    for (var i = 0; i < matchedCase.length; i++) {
+                        if (new RegExp(matchedCase[i]).test(chr)) {
+                            console.log("checkx: is true");					
+                            checkx = false;
+                        }
+                    }	
+              
+              if(form.validationPassword.value.length >= 20)
+                checkx = true;
+                    
+                    if ( checkx ) {
+                        event.preventDefault();
+                          event.stopPropagation();	  
+                      }
+              
+                
+
+                
+        
+                });
+            
+            //Validate Password to have more than 8 Characters and A capital Letter, small letter, number and special character
+                // Create an array and push all possible values that you want in password
+                var matchedCase = new Array();
+                matchedCase.push("[$@$$!%*#?&]"); // Special Charector
+                matchedCase.push("[A-Z]");      // Uppercase Alpabates
+                matchedCase.push("[0-9]");      // Numbers
+                matchedCase.push("[a-z]");     // Lowercase Alphabates
+                
+        
+                form.validationPassword.addEventListener('keyup', function(){
+                
+                var messageCase = new Array();
+                messageCase.push(" Caracter especial "); // Special Charector
+                messageCase.push(" Letra mayúscula ");      // Uppercase Alpabates
+                messageCase.push(" Números ");      // Numbers
+                messageCase.push(" Letra minúscula ");     // Lowercase Alphabates
+        
+                var ctr = 0;
+                var rti = "";
+                for (var i = 0; i < matchedCase.length; i++) {
+                    if (new RegExp(matchedCase[i]).test(form.validationPassword.value)) {
+                        if(i == 0) messageCase.splice(messageCase.indexOf(" Caracter especial "), 1);
+                        if(i == 1) messageCase.splice(messageCase.indexOf(" Letra mayúscula "), 1);
+                        if(i == 2) messageCase.splice(messageCase.indexOf(" Números "), 1);
+                        if(i == 3) messageCase.splice(messageCase.indexOf(" Letra minúscula "), 1);
+                        ctr++;
+                        //console.log(ctr);
+                        //console.log(rti);
+                    }
+                }		
+                
+                
+                //console.log(rti);
+                // Display it
+                var progressbar = 0;
+                var strength = "";
+                var bClass = "";
+                switch (ctr) {
+                case 0:
+                case 1: 
+                    strength = "Demasiado débil";
+                    progressbar = 15;
+                    bClass = "bg-danger";
+                    break;
+                case 2:
+                    strength = "Muy débil";
+                    progressbar = 25;
+                    bClass = "bg-danger";
+                    break;
+                case 3:
+                    strength = "Débil";	
+                    progressbar = 34;
+                    bClass = "bg-warning";			
+                    break;
+                case 4:
+                    strength = "Promedio";
+                    progressbar = 65;
+                    bClass = "bg-warning";						
+                    break;
+                }
+                
+                if (strength == "Promedio" && form.validationPassword.value.length >= 8 ) {
+                    strength = "Fuerte";
+                    bClass = "bg-success";			
+                    form.validationPassword.setCustomValidity("");			
+                } else {
+                    form.validationPassword.setCustomValidity(strength);
+                }
+        
+                var sometext = "";
+        
+                if(form.validationPassword.value.length < 8 ){
+              var lengthI = 8 - form.validationPassword.value.length;
+                    sometext += ` ${lengthI} más caracteres, `;
+                } 
+        
+                sometext += messageCase;
+                console.log(sometext);
+                
+                console.log(sometext);
+        
+                if(sometext){
+                    sometext = " necesitas:" + sometext;
+                }
+        
+        
+                $("#feedbackin, #feedbackirn").text(strength + sometext);
+                $("#progressbar").removeClass( "bg-danger bg-warning bg-success" ).addClass(bClass);
+                var plength = form.validationPassword.value.length ;
+                if(plength > 0) progressbar += ((plength - 0) * 1.75) ;
+                //console.log("plength: " + plength);
+                var  percentage = progressbar + "%";
+                form.validationPassword.parentNode.classList.add('was-validated');
+                //console.log("pacentage: " + percentage);
+                $("#progressbar").width( percentage );
+        
+                        if(form.validationPassword.checkValidity() === true){
+                            form.verifyPassword.disabled = false;
+                        } else {
+                            form.verifyPassword.disabled = true;
+                        }
+                          
+              
+            }); 
+              
+        
+              
+            });
+          }, false);
+        })();
+  </script>
   <script async src="https://sdk.arengu.com/forms.js"></script>
 
 

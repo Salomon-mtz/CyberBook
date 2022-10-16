@@ -471,8 +471,8 @@ def getReserva(request):
                 "estatus": r[3],
                 "tiempoRes": r[4],
                 "codigo": r[5],
-                "user_id": r[6],
-                "idServicio": r[7]
+                "user_id": r[7],
+                "idServicio": r[6]
                 
             }
             lista_salida.append(d)
