@@ -54,6 +54,7 @@ class Reservas(models.Model):
     user_id = models.ForeignKey(Usuarios, on_delete=models.CASCADE, default=0)
     codigo = models.CharField(max_length=50, default=0)
     idServicio = models.CharField(max_length=50, default=0)
+    hora = models.CharField(max_length=50, default=0)
 
 
 class Equipos(models.Model):

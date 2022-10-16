@@ -14,7 +14,7 @@ router.register(r'equipos', views.EquiposViewSet)
 router.register(r'usuarios', views.UsuarioViewSet)
 
 urlpatterns = [
-path('LoginApp', views.hacerLoginApp, name='LoginApp'),
+    path('LoginApp', views.hacerLoginApp, name='LoginApp'),
     path('getUsuariosApp', views.getUsuariosApp, name='getUsuariosApp'),
     path('registrarUsApp', views.registrarUsuarioApp, name='registrarUsApp'),
     path('enviarMail', views.enviarMail, name='enviarMail'),

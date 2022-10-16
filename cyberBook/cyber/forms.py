@@ -12,13 +12,13 @@ class NewUserForm(UserCreationForm):
     username = forms.CharField(max_length=100)
     password1 = forms.CharField(max_length=100)
     password2 = forms.CharField(max_length=100)
-    telefono = forms.CharField(max_length=100)
-    escuela = forms.CharField(max_length=100)
+    phone = forms.CharField(max_length=100)
+    school = forms.CharField(max_length=100)
     rol = forms.CharField(max_length=100)
     
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2", "telefono", "escuela", "rol")
+        fields = ('username', 'email', 'password1', 'password2', 'phone', 'school', 'rol')
 
 class UserUpdateForm(forms.ModelForm):
     username = forms.CharField(max_length=100,required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))

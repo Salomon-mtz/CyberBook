@@ -157,9 +157,9 @@ def signup(request):
         username = request.POST['username']
         pwd = request.POST['password1']
         email = request.POST["email"]
-        escuela = request.POST["escuela"]
-        rol = request.POST["rol"]
-        telefono = request.POST["telefono"]
+        telefono = request.POST['phone']
+        rol = request.POST['rol']
+        escuela = request.POST['school']
         nombre2 = username
         if Usuarios.objects.filter(email=email).exists():
             messages.success(request, ('correo ya registrado'))
@@ -251,7 +251,15 @@ def reservaEq(request, equipo_id, *args, **kwargs):
 def profile(request):
     query = Usuarios.objects.get(email = request.user.email)
     reservas = Reservas.objects.filter(user_id = query)
-    ctx = {'reservas': reservas}
+    esp = Reservas.objects.filter(user_id = query).filter(idServicio = "1").count()
+    eq = Reservas.objects.filter(user_id = query).filter(idServicio = "2").count()
+    soft = Reservas.objects.filter(user_id = query).filter(idServicio = "3").count()
+    ctx = {'reservas': reservas,
+            'esp' : esp,
+            'eq' : eq,
+            'soft' : soft,
+            'usuario' : query
+        }
     return render(request, 'cyber/profile.html', ctx)
 
 @csrf_exempt
@@ -271,14 +279,26 @@ def deleteUser(request):
 def edit_profile(request):
     if request.method == 'POST':
         username = request.POST['username']
-        password = request.POST['password']
+        telefono = request.POST['phone']
+        rol = request.POST['rol']
+        escuela = request.POST['school']
+        password = request.POST.get('password', False)
         query = Usuarios.objects.get(email = request.user.email)
         u_form = UserUpdateForm(request.POST, instance=query)
         u = request.user
         if u_form.is_valid():
+            contraseña1 = hashlib.sha256(password.encode())
+            contraseña2 = contraseña1.hexdigest()
+            query.password = contraseña2
             u_form.save()
             u.set_password(password)
             u.username = username
+            u.save()
+            u.telefono = telefono
+            u.save()
+            u.rol = rol
+            u.save()
+            u.escuela = escuela
             u.save()
             messages.success(request, ('Inicia Sesión para verificar tu nueva contraseña:'))
             return redirect('login')
@@ -288,7 +308,6 @@ def edit_profile(request):
 
     else:
         query = Usuarios.objects.get(email = request.user.email)
-        messages.error(request, "Registro fallido")
         u_form = UserUpdateForm(instance=query)
 
     ctx = {
