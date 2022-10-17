@@ -568,4 +568,76 @@ def getStats(request):
 
     return HttpResponse(json, content_type="application/json")
 
-   
+@csrf_exempt
+def block(request):
+    body_unicode = request.body.decode('utf-8')
+    body = loads(body_unicode)
+    blockLst = list(body.values())
+
+
+    
+    mydb = sqlite3.connect("db.sqlite3")
+    cur = mydb.cursor()
+
+    getReserva = "SELECT fecha, tipoRes FROM cyber_reservas"
+    rows = cur.execute(getReserva)
+    
+
+    if rows is None:
+        raise Http404("user_id does not exist")
+    else:
+        for r in rows:
+            print(r)
+            disponible = "True"
+            if (blockLst == list(r)):
+                disponible = "False"
+                print(disponible)
+            else:
+                disponible = "True"
+                print(disponible)
+        if disponible == "False":
+            json = dumps({"msg": "Ocupado"})
+        else:
+            json = dumps({"msg": "Libre"})
+            
+            
+    mydb.commit()
+    mydb.close()
+
+    return HttpResponse(json, content_type="application/json")
+
+@csrf_exempt
+def getReserva(request):
+    userId = request.GET["user_id"]
+    mydb = sqlite3.connect("db.sqlite3")
+    cur = mydb.cursor()
+
+    getReserva = "SELECT * FROM cyber_reservas WHERE cyber_reservas.user_id_id = ?"
+    rows = cur.execute(getReserva, (userId,)).fetchall()
+
+    if rows is None:
+        raise Http404("user_id does not exist")
+    else:
+
+        lista_salida = []
+        for r in rows:
+            d = {
+                "id": r[0],
+                "fecha": r[1],
+                "tipoRes": r[2],
+                "estatus": r[3],
+                "tiempoRes": r[4],
+                "codigo": r[5],
+                "idServicio": r[6],
+                "hora": r[7],
+                "user_id": r[8]
+                
+            }
+            lista_salida.append(d)
+            print(lista_salida[0])
+
+        json = dumps(lista_salida)
+    mydb.commit()
+    mydb.close()
+
+    return HttpResponse(json, content_type="application/json")

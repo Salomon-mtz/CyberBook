@@ -22,6 +22,7 @@ urlpatterns = [
     path('resvSp', views.getReserva, name='resvSp'),
     path('getData', views.getData, name='getData'),
     path('getStats', views.getStats, name='getStats'),
+    path('block', views.block, name='block'),
     
     
     path('api/', include(router.urls)),
