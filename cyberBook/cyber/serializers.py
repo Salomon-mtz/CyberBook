@@ -23,7 +23,7 @@ class ReservaSerializer(serializers.ModelSerializer):
 class EquiposSerializer(serializers.ModelSerializer):
     class Meta:
         model = Equipos
-        fields = ('id', 'tipoEq', 'caracteristicas', 'disponibleEq', 'hora')
+        fields = ('id', 'tipoEq', 'caracteristicas', 'disponibleEq')
         
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
