@@ -34,13 +34,11 @@ class Espacios(models.Model):
     tiempoEsp = models.CharField(max_length=500, default=0)
     disponibleEsp = models.CharField(max_length=500, default=0)
     capacidad = models.CharField(max_length=500, default=0)
-    fechaEsp = models.CharField(max_length=30, default=0)
     imageEsp = models.ImageField(upload_to='cyber/static', default='')
     isActive = isActive = models.BooleanField(default=1)
 
 class Softwares(models.Model):
     id = models.AutoField(primary_key=True)
-    fechaSoft = models.CharField(max_length=30, default=0)
     tipoSoft = models.CharField(max_length=20, default=0)
     caracteristicas = models.CharField(max_length=50, default=0)
     tiempoSoft = models.CharField(max_length=500, default=0)
@@ -61,7 +59,6 @@ class Reservas(models.Model):
 
 class Equipos(models.Model):
     id = models.AutoField(primary_key=True)
-    fechaEq = models.CharField(max_length=30, default=0)
     tipoEq = models.CharField(max_length=20, default=0)
     caracteristicas = models.CharField(max_length=50, default=0)
     tiempoEq = models.CharField(max_length=500, default=0)

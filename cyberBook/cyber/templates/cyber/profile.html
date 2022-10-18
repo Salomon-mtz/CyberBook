@@ -75,6 +75,10 @@
             display: table;
             color: #4ad1e5;
         }
+        hr.rounded {
+          border-top: 8px solid #021C51;
+          border-radius: 5px;
+        }
         
     </style>
   </head>
@@ -93,9 +97,9 @@
             <nav class="nav" id="nav">
                 <ul>
                     <li><a href="{% url 'index' %}">Inicio</a></li>
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
                     <li><a href="{% url 'reservas' %}">Reserva</a></li>
                     <li><a href="{% url 'profile' %}">Perfil</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
                 </ul>
             </nav> 
         </div>
@@ -173,7 +177,8 @@
             
         </article>
         <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-<div class="container">
+<div class="container" style="margin-bottom: 60px;">
+  <hr class="rounded"> 
 	<div class="row">
 	    <br/>
 	   <div class="col text-center">
@@ -183,14 +188,14 @@
 		<div class="row text-center">
 	    <div class="col">
 	      <div class="counter">
-          <i class="fa fa-code fa-2x"></i>
+          <i class="fa fa-coffee fa-2x"></i>
           <h2 class="timer count-title count-number" data-to={{esp}} data-speed="1500"></h2>
           <p class="count-text ">Espacios</p>
         </div>
 	    </div>
     <div class="col">
       <div class="counter">
-        <i class="fa fa-coffee fa-2x"></i>
+        <i class="fa fa-code fa-2x"></i>
         <h2 class="timer count-title count-number" data-to={{eq}} data-speed="1500"></h2>
         <p class="count-text ">Equipos</p>
       </div>
@@ -206,6 +211,10 @@
 
 </div>
       </section>
+      <!-- Footer-->
+  <footer class="py-5 bg-dark">
+    <div class="container"><p class="m-0 text-center text-white"></p></div>
+  </footer>
     
 
     <script src="{% static 'css/jquery/dist/jquery.min.js' %}"></script>

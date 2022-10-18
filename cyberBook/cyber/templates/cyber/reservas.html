@@ -42,6 +42,10 @@
       .maincontainer{
         margin-top: 30px;
       }
+      hr.rounded {
+        border-top: 8px solid #021C51;
+        border-radius: 5px;
+      }
     </style>
   </head>
   <body>
@@ -63,9 +67,9 @@
             <nav class="nav" id="nav">
                 <ul>
                     <li><a href="{% url 'index' %}">Inicio</a></li>
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
                     <li><a href="{% url 'reservas' %}">Reserva</a></li>
                     <li><a href="{% url 'profile' %}">Perfil</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
                 </ul>
             </nav> 
         </div>
@@ -99,16 +103,18 @@
 
 
     <section class="main container">
-      <h2 class = "title" style="color:white">Espacios:</h2>
+      <h1 class = "cyber" style="color:white; margin-bottom: 50px;">Reservas</h1>
+      <hr class="rounded">  
+      <h1 class="cyber2" style="color:white">Espacios:</h1>
       <article class="description2">
-        <div class="containerCard">
+        <div class="containerCard" style="margin-bottom: 50px;">
           {% for espacio in espacios %}
           <div class="espacio row">
             <div class="col">
               <div class="card bg-light">
                 <div class="text-center">
                   <a href="/reservaEsp/{{ espacio.id }}">
-                    <img class="img-fluid" src="{{ espacio.imageEsp.url  }}" style="height:300px;width:220px;"/>
+                    <img class="img-fluid" src="{{ espacio.imageEsp.url  }}" style="height:300px;width:260px;"/>
                   </a>
                 </div>
                 <div class="card-body">
@@ -123,7 +129,8 @@
     </section>
     
     <section class="main container">
-      <h2 class = "title" style="color:white">Software:</h2>
+      <hr class="rounded">
+      <h1 class="cyber2" style="color:#021C51">Software:</h1>
       <article class="description2">
         <div class="containerCard">
           {% for software in softwares %}
@@ -132,7 +139,7 @@
               <div class="card bg-light">
                 <div class="text-center">
                   <a href="/reservaSoft/{{ software.id }}">
-                    <img class="img-fluid" src="{{ software.imageSoft.url  }}" style="height:300px;width:220px;"/>
+                    <img class="img-fluid" src="{{ software.imageSoft.url  }}" style="height:300px;width:260px;"/>
                   </a>
                 </div>
                 <div class="card-body">
@@ -148,7 +155,8 @@
 
 
     <section class="main container">
-      <h2 class = "title" style="color:black">Equipos:</h2>
+      <hr class="rounded">
+      <h1 class="cyber2" style="color:#021C51">Equipos:</h1>
       <article class="description2">
         <div class="containerCard">
           {% for equipo in equipos %}
@@ -157,7 +165,7 @@
               <div class="card bg-light">
                 <div class="text-center">
                   <a href="/reservaEq/{{ equipo.id }}">
-                    <img class="img-fluid" src="{{ equipo.imageEq.url  }}" style="height:300px;width:220px;"/>
+                    <img class="img-fluid" src="{{ equipo.imageEq.url  }}" style="height:300px;width:260px;"/>
                   </a>
                 </div>
                 <div class="card-body">
@@ -165,12 +173,17 @@
                   <h4 style="color:#021C51; margin-top: 10px;" >{{equipo.caracteristicas}}</h4>
                 </div>
               </div>
-            </div>   
+            </div>
         </div>
-          {% endfor %}
+          {% endfor %} 
       </article>
+      <hr class="rounded">  
     </section>
-
+    
+  <!-- Footer-->
+  <footer class="py-5 bg-dark">
+    <div class="container"><p class="m-0 text-center text-white"></p></div>
+  </footer>
 
     <script src="{% static 'css/jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'css/bootstrap/dist/js/bootstrap.min.js'%}"></script>

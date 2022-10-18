@@ -235,17 +235,20 @@ def equipos(request, equipos_id):
 
 def reservaEsp(request, espacio_id, *args, **kwargs):
     espacios = Espacios.objects.get(pk=espacio_id)
-    ctx = {'espacios': espacios}
+    espacios2 = Espacios.objects.all()
+    ctx = {'espacios': espacios, 'espacios2':espacios2}
     return render(request, 'cyber/reservaEsp.html', ctx)
 
 def reservaSoft(request, software_id, *args, **kwargs):
     softwares = Softwares.objects.get(pk=software_id)
-    ctx = {'softwares': softwares}
+    softwares2 = Softwares.objects.all()
+    ctx = {'softwares': softwares, 'softwares2' : softwares2}
     return render(request, 'cyber/reservaSoft.html', ctx)
 
 def reservaEq(request, equipo_id, *args, **kwargs):
     equipos = Equipos.objects.get(pk=equipo_id)
-    ctx = {'equipos': equipos}
+    equipos2 = Equipos.objects.all()
+    ctx = {'equipos': equipos, 'equipos2': equipos2}
     return render(request, 'cyber/reservaEq.html', ctx)
 
 def profile(request):

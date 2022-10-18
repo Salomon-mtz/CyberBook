@@ -6,13 +6,13 @@ from django.contrib.auth.models import User
 class EspacioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Espacios
-        fields = ('id', 'nombreEspacio', 'caracteristicas', 'tiempoEsp', 'disponibleEsp', 'capacidad', 'fechaEsp')
+        fields = ('id', 'nombreEspacio', 'caracteristicas', 'disponibleEsp', 'capacidad')
         
         
 class SoftwareSerializer(serializers.ModelSerializer):
     class Meta:
         model = Softwares
-        fields = ('id', 'fechaSoft', 'tipoSoft', 'caracteristicas', 'tiempoSoft', 'disponibleSoft')
+        fields = ('id', 'tipoSoft', 'caracteristicas', 'disponibleSoft')
         
         
 class ReservaSerializer(serializers.ModelSerializer):
@@ -23,7 +23,7 @@ class ReservaSerializer(serializers.ModelSerializer):
 class EquiposSerializer(serializers.ModelSerializer):
     class Meta:
         model = Equipos
-        fields = ('id', 'fechaEq', 'tipoEq', 'caracteristicas', 'tiempoEq', 'disponibleEq', 'hora')
+        fields = ('id', 'tipoEq', 'caracteristicas', 'disponibleEq', 'hora')
         
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:

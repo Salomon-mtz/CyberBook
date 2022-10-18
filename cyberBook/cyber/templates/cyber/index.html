@@ -54,9 +54,9 @@
             <nav class="nav" id="nav">
                 <ul>
                     <li><a href="{% url 'index' %}">Inicio</a></li>
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
                     <li><a href="{% url 'reservas' %}">Reserva</a></li>
                     <li><a href="{% url 'profile' %}">Perfil</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
                 </ul>
             </nav> 
         </div>
@@ -111,16 +111,11 @@
         <div>
           <h1 class="title">¿Qué es el Hub de Ciberseguiridad?</h1>
           <h3 class="explanation">
-            Lorem Ipsum is simply dummy text of the printing and typesetting 
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of 
-            type and scrambled it to make a type specimen book. It has 
-            survived not only five centuries, but also the leap into e
-            lectronic typesetting, remaining essentially unchanged. It 
-            was popularised in the 1960s with the release of Letraset 
-            sheets containing Lorem Ipsum passages, and more recently 
-            with desktop publishing software like Aldus PageMaker including 
-            versions of Lorem Ipsum.
+            El Hub forma parte de la Escuela de Ingeniería y Ciencias, y cuenta con equipo e instalaciones de última generación siendo una plataforma 
+            de trabajo abierta interactiva colaborativa multi organizacional de gran importancia no solo en México sino en toda Latinoamérica. 
+            El hub tiene como objetivo brindar soporte para organizaciones que demandan salvaguarda en sus redes de información estratégica además 
+            de brindar eventos para la difusión y concientización de la importancia del concepto de ciberseguridad.
+
           </h3>
         </div>
       </article>
@@ -133,16 +128,13 @@
           <div class = "col">
             <img src="{% static 'png/lab.png'%}" class="service-item img-fluid">
             <h1>Laboratorio</h1>
-            <p>explanation</p>
           </div><div class = "col">
             <img src="{% static 'png/salón.png'%}" class="service-item img-fluid">
             <h1>Salón</h1>
-            <p>explanation</p>
           </div>
           <div class = "col">
             <img src="{% static 'png/junta.png'%}" class="service-item img-fluid">
             <h1>Sala de Juntas</h1>
-            <p>explanation</p>
           </div>
         </div>
 
@@ -150,17 +142,14 @@
           <div class = "col">
             <img src="{% static 'png/equipo.png'%}" class="service-item img-fluid">
             <h1>Equipo</h1>
-            <p>explanation</p>
           </div>
           <div class = "col">
             <img src="{% static 'png/licencia.png'%}" class="service-item img-fluid">
             <h1>Licencias</h1>
-            <p>explanation</p>
           </div>
           <div class = "col">
             <img src="{% static 'png/software.png'%}" class="service-item img-fluid">
             <h1>Software</h1>
-            <p>explanation</p>
           </div>
         </div>
       </article>
@@ -171,28 +160,16 @@
       <article class="row d-flex text-center">
         <div class = "col attributes">
           <div>
-            <img src="{% static 'png/register.png'%}" class="about-item img-fluid"><p>Lorem Ipsum is simply dummy text of the printing and typesetting 
-                                                                                      industry. Lorem Ipsum has been the industry's standard dummy text
-                                                                                      ever since the 1500s, when an unknown printer took a galley of 
-                                                                                      type and scrambled it to make a type specimen book.</p>
+            <img src="{% static 'png/register.png'%}" class="about-item img-fluid"><p style = "color: #021C51; font-size: 25px;">Registrate como estudiante o profesor.</p>
           </div>
           <div>
-            <img src="{% static 'png/book.png'%}" class="about-item img-fluid"><p>Lorem Ipsum is simply dummy text of the printing and typesetting 
-                                                                                      industry. Lorem Ipsum has been the industry's standard dummy text
-                                                                                      ever since the 1500s, when an unknown printer took a galley of 
-                                                                                      type and scrambled it to make a type specimen book.</p>
+            <img src="{% static 'png/book.png'%}" class="about-item img-fluid"><p style = "color: #021C51; font-size: 25px;">Reserva espacios, licencias o equipo dentro del Hub de Ciberseguridad.</p>
           </div>
           <div>
-            <img src="{% static 'png/historial.png'%}" class="about-item img-fluid"><p>Lorem Ipsum is simply dummy text of the printing and typesetting 
-                                                                                      industry. Lorem Ipsum has been the industry's standard dummy text
-                                                                                      ever since the 1500s, when an unknown printer took a galley of 
-                                                                                      type and scrambled it to make a type specimen book.</p>
+            <img src="{% static 'png/historial.png'%}" class="about-item img-fluid"><p style = "color: #021C51; font-size: 25px;">Consulta el historial de tus reservaciones.</p>
           </div>
           <div>
-            <img src="{% static 'png/bulb.png'%}" class="about-item img-fluid"><p>Lorem Ipsum is simply dummy text of the printing and typesetting 
-                                                                                      industry. Lorem Ipsum has been the industry's standard dummy text
-                                                                                      ever since the 1500s, when an unknown printer took a galley of 
-                                                                                      type and scrambled it to make a type specimen book.</p>
+            <img src="{% static 'png/bulb.png'%}" class="about-item img-fluid"><p style = "color: #021C51; font-size: 25px;">Conoce sobre los servicios e instalaciones del Hub de Ciberseguiridad</p>
           </div>
         </div>
         <div class = "col ms-5">
@@ -202,7 +179,7 @@
     </section>
 
     <section class="org mt-5 splide" aria-label="Splide Basic HTML Example">
-      <h1 class = "title text-center"> Organizaciones Participantes</h1>
+      <h1 class = "title text-center" style="    margin-bottom: 50px;"> Organizaciones Participantes</h1>
       <div class = "row text-center ">
         <div class = "col">
           <img src="{% static 'png/tec.png'%}" class="organizations-main img-fluid">
