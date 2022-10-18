@@ -318,6 +318,9 @@ def edit_profile(request):
     }
     return render(request, 'cyber/edit_profile.html', ctx)
 
+def terminos(request):
+    return render(request, 'cyber/terminos.html')
+
     #APP
 class EspaciosViewSet(viewsets.ModelViewSet):
     queryset = Espacios.objects.all().order_by('id')
