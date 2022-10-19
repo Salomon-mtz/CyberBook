@@ -509,7 +509,7 @@ def getReserva(request):
 
     return HttpResponse(json, content_type="application/json")
 
-
+@csrf_exempt
 def getData(request):
     userId = request.GET["id"]
     print(userId)
@@ -544,7 +544,7 @@ def getData(request):
 
     return HttpResponse(json, content_type="application/json")
 
-
+@csrf_exempt
 def getStats(request):
     userId = request.GET["user_id"]
     print(userId)
